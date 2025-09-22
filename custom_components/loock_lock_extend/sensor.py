@@ -7,28 +7,13 @@ from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
-from .const import DOMAIN
+from const import DOMAIN, LockState, state_mapper
 
 _LOGGER = logging.getLogger(__name__)
 
 
-async def async_setup_entry(
-    hass: HomeAssistant,
-    config_entry: ConfigEntry,
-    async_add_entities: AddEntitiesCallback,
-) -> None:
-    """Set up Loock Lock Extend sensors from a config entry."""
-    _LOGGER.info("设置Loock Lock Extend传感器")
-    
-    # 创建传感器实体
-    sensors = [
-        LoockDoorStateSensor(),
-    ]
-    
-    async_add_entities(sensors, True)
-
 class LoockDoorStateSensor(SensorEntity):
-    """鹿客门锁状态传感器"""
+    """门锁状态传感器"""
     
     def __init__(self, hass):
         """初始化传感器"""

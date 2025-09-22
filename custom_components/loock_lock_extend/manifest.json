@@ -1,13 +1,13 @@
 {
   "domain": "loock_lock_extend",
-  "name": "Loock门锁扩展",
+  "name": "Loock Lock Extend",
   "codeowners": ["@zcmk123"],
-  "config_flow": true,
+  "config_flow": false,
   "dependencies": [],
-  "documentation": "https://github.com/zcmk123/loock_lock_extend",
+  "documentation": "https://github.com/zcmk123/loock-lock-extend",
   "integration_type": "device",
   "iot_class": "local_polling",
-  "issue_tracker": "https://github.com/zcmk123/loock_lock_extend/issues",
+  "issue_tracker": "https://github.com/zcmk123/loock-lock-extend/issues",
   "requirements": [],
   "version": "0.1.0"
 }
