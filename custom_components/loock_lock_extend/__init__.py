@@ -1,3 +1,8 @@
+"""Top-level package for Loock Lock Extend."""
+
+__author__ = """DoubleBird"""
+__email__ = 'zcmk1234@gmail.com'
+
 """Loock Lock Extend - Home Assistant 集成主模块
 
 这个模块提供了 Home Assistant 集成的核心功能，
