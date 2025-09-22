@@ -1,6 +1,6 @@
 {
   "domain": "loock_lock_extend",
-  "name": "loock门锁扩展",
+  "name": "Loock门锁扩展",
   "codeowners": ["@zcmk123"],
   "config_flow": false,
   "dependencies": [],

@@ -1,0 +1,9 @@
+{
+  "name": "Loock门锁扩展",
+  "description": "Home Assistant集成，用于扩展Loock智能门锁功能",
+  "url": "https://github.com/zcmk123/loock_lock_extend",
+  "domains": ["sensor"],
+  "homeassistant": "2023.8.0",
+  "iot_class": "local_polling",
+  "render_readme": true
+}

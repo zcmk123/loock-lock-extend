@@ -1,8 +1,6 @@
 from enum import Enum
 from typing import Dict, Optional
 
-DOMAIN = "loock_lock"
-
 class LockState(Enum):
     """智能门锁状态枚举"""
     LOCKED = "locked"
