@@ -2,7 +2,7 @@
   "domain": "loock_lock_extend",
   "name": "Loock门锁扩展",
   "codeowners": ["@zcmk123"],
-  "config_flow": false,
+  "config_flow": true,
   "dependencies": [],
   "documentation": "https://github.com/zcmk123/loock_lock_extend",
   "integration_type": "device",
