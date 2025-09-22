@@ -31,9 +31,8 @@ def setup_platform(
 class LoockDoorStateSensor(SensorEntity):
     """门锁状态传感器"""
     
-    def __init__(self, hass):
+    def __init__(self):
         """初始化传感器"""
-        self.hass = hass
         self._attr_name = "门锁状态"
         self._attr_unique_id = f"{DOMAIN}_door_state"
         self._attr_device_class = SensorDeviceClass.ENUM
@@ -52,6 +51,17 @@ class LoockDoorStateSensor(SensorEntity):
         # 使用state_mapper获取状态
         state_str = state_mapper.get_state_str(state_code)
         return state_str if state_str else "unknown"
+    
+    @property
+    def friendly_state(self):
+        state = self._get_door_state_code()
+        friendly_names = {
+            LockState.LOCKED: "已上锁",
+            LockState.UNLOCKED: "已解锁", 
+            LockState.DOOR_OPEN: "门已开启",
+            LockState.DOOR_AJAR: "门虚掩"
+        }
+        return friendly_names.get(state, "未知状态")
 
     @property
     def extra_state_attributes(self):
@@ -66,7 +76,7 @@ class LoockDoorStateSensor(SensorEntity):
         
         state = state_mapper.get_state(state_code)
         friendly_names = {
-            LockState.LOCKED: "已锁定",
+            LockState.LOCKED: "已上锁",
             LockState.UNLOCKED: "已解锁", 
             LockState.DOOR_OPEN: "门已开启",
             LockState.DOOR_AJAR: "门虚掩"
