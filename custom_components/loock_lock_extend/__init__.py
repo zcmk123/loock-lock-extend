@@ -1,36 +1,19 @@
+"""Example Load Platform integration."""
 from __future__ import annotations
 
-import logging
-from homeassistant.config_entries import ConfigEntry
-from homeassistant.const import Platform
 from homeassistant.core import HomeAssistant
-
+from homeassistant.helpers.discovery import load_platform
+from homeassistant.helpers.typing import ConfigType
 from .const import DOMAIN
-from .sensor import LoockDoorStateSensor
-
-_LOGGER = logging.getLogger(__name__)
-
-PLATFORMS: list[Platform] = [Platform.SENSOR]
 
 
-async def async_setup_entry(
-    hass: HomeAssistant,
-    config_entry: ConfigEntry,
-    async_add_entities: AddEntitiesCallback,
-) -> None:
-    """Set up Loock Lock Extend sensors from a config entry."""
-    _LOGGER.info("设置Loock Lock Extend传感器")
-    
-    # 创建传感器实体
-    sensors = [
-        LoockDoorStateSensor(),
-    ]
-    
-    async_add_entities(sensors, True)
+def setup(hass: HomeAssistant, config: ConfigType) -> bool:
+    """Your controller/hub specific code."""
+    # Data that you want to share with your platforms
+    # hass.data[DOMAIN] = {
+    #     'temperature': 23
+    # }
 
-# async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
-#     """Unload a config entry."""
-#     if unload_ok := await hass.config_entries.async_unload_platforms(entry, PLATFORMS):
-#         hass.data[DOMAIN].pop(entry.entry_id)
+    load_platform(hass, 'sensor', DOMAIN, {}, config)
 
-#     return unload_ok
+    return True

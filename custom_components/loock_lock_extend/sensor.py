@@ -2,14 +2,30 @@
 from __future__ import annotations
 
 import logging
-from homeassistant.components.sensor import SensorEntity
-from homeassistant.config_entries import ConfigEntry
+
+from homeassistant.components.sensor import (
+    SensorDeviceClass,
+    SensorEntity,
+    SensorStateClass,
+)
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
+from homeassistant.helpers.typing import ConfigType, DiscoveryInfoType
 
 from .const import DOMAIN, LockState, state_mapper
 
 _LOGGER = logging.getLogger(__name__)
+
+def setup_platform(
+    hass: HomeAssistant,
+    config: ConfigType,
+    add_entities: AddEntitiesCallback,
+    discovery_info: DiscoveryInfoType | None = None
+) -> None:
+    """Set up the sensor platform."""
+    if discovery_info is None:
+        return
+    add_entities([LoockDoorStateSensor()])
 
 
 class LoockDoorStateSensor(SensorEntity):
@@ -21,7 +37,6 @@ class LoockDoorStateSensor(SensorEntity):
         self._attr_name = "门锁状态"
         self._attr_unique_id = f"{DOMAIN}_door_state"
         self._attr_device_class = SensorDeviceClass.ENUM
-        self._attr_entity_category = EntityCategory.DIAGNOSTIC
         self._attr_icon = "mdi:door"
         
         # 设置可能的状态选项
