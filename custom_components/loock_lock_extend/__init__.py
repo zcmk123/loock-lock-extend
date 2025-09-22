@@ -17,6 +17,7 @@ from typing import Any
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import Platform
 from homeassistant.core import HomeAssistant
+from homeassistant.helpers.typing import ConfigType
 
 from .const import DOMAIN
 
@@ -24,6 +25,21 @@ _LOGGER = logging.getLogger(__name__)
 
 # 支持的平台
 PLATFORMS: list[Platform] = [Platform.SENSOR]
+
+
+async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
+    """通过YAML配置设置集成"""
+    _LOGGER.info("通过YAML配置设置Loock Lock Extend集成")
+    
+    # 存储集成数据
+    hass.data.setdefault(DOMAIN, {})
+    
+    # 直接设置平台，无需配置条目
+    hass.async_create_task(
+        hass.helpers.discovery.async_load_platform(Platform.SENSOR, DOMAIN, {}, config)
+    )
+    
+    return True
 
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:

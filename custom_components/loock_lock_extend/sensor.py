@@ -1,6 +1,15 @@
 from homeassistant.components.sensor import SensorEntity, SensorDeviceClass
 from homeassistant.const import EntityCategory
+from homeassistant.helpers.typing import ConfigType, DiscoveryInfoType
 from .const import DOMAIN, state_mapper, LockState
+
+
+async def async_setup_platform(
+    hass, config: ConfigType, async_add_entities, discovery_info: DiscoveryInfoType = None
+):
+    """通过YAML配置设置传感器平台"""
+    async_add_entities([LoockDoorStateSensor(hass)])
+
 
 async def async_setup_entry(hass, entry, async_add_entities):
     """设置传感器实体"""
