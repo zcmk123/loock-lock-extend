@@ -5,7 +5,8 @@ from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import Platform
 from homeassistant.core import HomeAssistant
 
-from const import DOMAIN, LoockDoorStateSensor
+from .const import DOMAIN
+from .sensor import LoockDoorStateSensor
 
 _LOGGER = logging.getLogger(__name__)
 
