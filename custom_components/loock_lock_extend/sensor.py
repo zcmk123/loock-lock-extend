@@ -54,14 +54,12 @@ class LoockDoorStateSensor(SensorEntity):
     
     @property
     def friendly_state(self):
-        state = self._get_door_state_code()
-        friendly_names = {
-            LockState.LOCKED: "已上锁",
-            LockState.UNLOCKED: "已解锁", 
-            LockState.DOOR_OPEN: "门已开启",
-            LockState.DOOR_AJAR: "门虚掩"
-        }
-        return friendly_names.get(state, "未知状态")
+        state_code = self._get_door_state_code()
+        if state_code is None:
+            return "未知状态"
+        
+        state = state_mapper.get_state(state_code)
+        return state.friendly_name(state) if state else "未知状态"
 
     @property
     def extra_state_attributes(self):
@@ -75,16 +73,10 @@ class LoockDoorStateSensor(SensorEntity):
             }
         
         state = state_mapper.get_state(state_code)
-        friendly_names = {
-            LockState.LOCKED: "已上锁",
-            LockState.UNLOCKED: "已解锁", 
-            LockState.DOOR_OPEN: "门已开启",
-            LockState.DOOR_AJAR: "门虚掩"
-        }
         
         attributes = {
             "raw_state": state_code,
-            "friendly_state": friendly_names.get(state, "未知状态"),
+            "friendly_state": state.friendly_name() if state else "未知状态",
             "is_locked": state_mapper.is_locked(state_code),
             "is_unlocked": state_mapper.is_unlocked(state_code),
             "is_door_open": state_mapper.is_door_open(state_code),

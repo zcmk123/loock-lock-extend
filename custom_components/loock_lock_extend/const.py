@@ -12,6 +12,16 @@ class LockState(Enum):
     
     def __str__(self) -> str:
         return self.value
+    
+    def friendly_name(state) -> str:
+        """返回状态的友好名称"""
+        friendly_names = {
+            LockState.LOCKED: "已上锁",
+            LockState.UNLOCKED: "已解锁", 
+            LockState.DOOR_OPEN: "门已开启",
+            LockState.DOOR_AJAR: "门虚掩"
+        }
+        return friendly_names.get(state, "未知状态")
 
 
 class StateRange:
